@@ -30,7 +30,7 @@ function onEachFeature(feature, layer) {
 // ===============================
 // 4. CARGAR NSE
 // ===============================
-fetch('data/nse.geojson')
+fetch('data/nse_valle.geojson')
   .then(res => res.json())
   .then(data => {
     capaNSE = L.geoJSON(data, {
