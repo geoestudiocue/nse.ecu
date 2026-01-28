@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Cargar GeoJSON
-fetch('data/nse.geojson')
+fetch('data/nse_valle.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data, {
