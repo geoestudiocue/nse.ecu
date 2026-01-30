@@ -41,22 +41,19 @@ function onEachFeature(feature, layer) {
 // ===============================
 // 5. CARGAR NSE
 // ===============================
-fetch('data/nse_valle.geojson')
-  .then(response => response.json())
+fetch('./data/nse_valle.geojson')
+  .then(response => {
+    console.log('STATUS:', response.status);
+    return response.json();
+  })
   .then(data => {
+    console.log('GeoJSON cargado:', data);
 
-    capaNSE = L.geoJSON(data, {
-      style: function (feature) {
-        return {
-          fillColor: getColorNSE(feature.properties["NSE Predominante"]),
-          weight: 0.6,
-          color: '#333',
-          opacity: 1,
-          fillOpacity: 0.8
-        };
-      },
-      onEachFeature: onEachFeature
-    }).addTo(map);
+    capaNSE = L.geoJSON(data).addTo(map);
+    map.fitBounds(capaNSE.getBounds());
+  })
+  .catch(error => console.error('ERROR:', error));
+
 
     // ===============================
     // 6. CONTROL DE CAPAS (DESPUÉS DE CARGAR)
