@@ -14,7 +14,7 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let capaNSE;
 let capaValle;
 // ===============================
-// 2. FUNCION PARA COLORES
+// 3. FUNCION PARA COLORES
 // ===============================
 function getColorNSE(nse) {
   return nse === 'A (Alto)'        ? '#01ff05' :
@@ -25,7 +25,7 @@ function getColorNSE(nse) {
                                    '#cccccc';
 }
 // ===============================
-// 3. FUNCION PARA POPUPS
+// 4. FUNCION PARA POPUPS
 // ===============================
 function onEachFeature(feature, layer) {
   if (feature.properties) {
@@ -38,7 +38,7 @@ function onEachFeature(feature, layer) {
 }
 
 // ===============================
-// 4. CARGAR NSE
+// 5. CARGAR NSE
 // ===============================
 fetch('data/nse_valle.geojson')
   .then(response => response.json())
@@ -56,20 +56,6 @@ fetch('data/nse_valle.geojson')
       }
     }).addTo(map);
 
-  });
-// ===============================
-// 5. CARGAR VALLE
-// ===============================
-fetch('data/nse_valle.geojson')
-  .then(res => res.json())
-  .then(data => {
-    capaValle = L.geoJSON(data, {
-      style: {
-        color: 'blue',
-        weight: 2
-      },
-      onEachFeature: onEachFeature
-    });
   });
 
 // ===============================
