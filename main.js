@@ -71,7 +71,6 @@ fetch('./data/nse_valle.geojson')
     const baseMaps = {
       "OpenStreetMap": osm
     };
-
     const overlayMaps = {
       "NSE Valle": capaNSE
     };
