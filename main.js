@@ -12,20 +12,21 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // 2. VARIABLES PARA CAPAS
 // ===============================
 let capaNSE;
-let capaValle;
+
 // ===============================
-// 3. FUNCION PARA COLORES
+// 3. FUNCIÓN PARA COLORES
 // ===============================
 function getColorNSE(nse) {
-  return nse === 'A (Alto)'        ? '#01ff05' :
-         nse === 'B (Medio Alto)' ? '#59c72d' :
-         nse === 'C+ (Medio)'     ? '#d2c09c' :
-         nse === 'C- (Medio Bajo)'? '#ff8801' :
-         nse === 'D (Bajo)'       ? '#ff012b' :
-                                   '#cccccc';
+  return nse === 'A (Alto)'         ? '#01ff05' :
+         nse === 'B (Medio Alto)'  ? '#59c72d' :
+         nse === 'C+ (Medio)'      ? '#d2c09c' :
+         nse === 'C- (Medio Bajo)' ? '#ff8801' :
+         nse === 'D (Bajo)'        ? '#ff012b' :
+                                    '#cccccc';
 }
+
 // ===============================
-// 4. FUNCION PARA POPUPS
+// 4. FUNCIÓN PARA POPUPS
 // ===============================
 function onEachFeature(feature, layer) {
   if (feature.properties) {
@@ -44,7 +45,7 @@ fetch('data/nse_valle.geojson')
   .then(response => response.json())
   .then(data => {
 
-    L.geoJSON(data, {
+    capaNSE = L.geoJSON(data, {
       style: function (feature) {
         return {
           fillColor: getColorNSE(feature.properties["NSE Predominante"]),
@@ -53,26 +54,24 @@ fetch('data/nse_valle.geojson')
           opacity: 1,
           fillOpacity: 0.8
         };
-      }
+      },
+      onEachFeature: onEachFeature
     }).addTo(map);
 
-  });
+    // ===============================
+    // 6. CONTROL DE CAPAS (DESPUÉS DE CARGAR)
+    // ===============================
+    const baseMaps = {
+      "OpenStreetMap": osm
+    };
 
-// ===============================
-// 6. CONTROL DE CAPAS
-// ===============================
-const baseMaps = {
-  "OpenStreetMap": osm
-};
+    const overlayMaps = {
+      "NSE Valle": capaNSE
+    };
 
-const overlayMaps = {
-  "NSE": capaNSE,
-  "NSE Valle": capaValle
-};
+    L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false
+    }).addTo(map);
 
-// ⚠️ Esperar a que carguen
-setTimeout(() => {
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(map);
-}, 1000);
+  })
+  .catch(error => console.error('Error cargando NSE:', error));
