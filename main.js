@@ -157,7 +157,7 @@ if (capaNSE.getBounds().isValid()) {
       }).addTo(map);
 
 // ===============================
-// 9. LEYENDA NSE
+// 8. LEYENDA NSE
 // ===============================
 const legend = L.control({ position: 'bottomright' });
 
@@ -193,7 +193,7 @@ legend.onAdd = function () {
 legend.addTo(map);
 
     // ===============================
-  // . CONTROL DE ERROR
+  // 9. CONTROL DE ERROR
   // ===============================   
       
     })
@@ -222,7 +222,7 @@ legend.addTo(map);
     });
 
   // ===============================
-  // 8. CONTROL DE LOCALIZACIÓN (opcional)
+  // 10. CONTROL DE LOCALIZACIÓN (opcional)
   // ===============================
   setTimeout(() => {
     console.log('Vista actual del mapa:', {
