@@ -32,17 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===============================
   // 2. FUNCIÓN COLORES NSE
   // ===============================
-  function getColorNSE(nse) {
-    if (!nse) return '#cccccc';
-    
-    return nse === 'A (Alto)'         ? '#01ff05' :
-           nse === 'B (Medio Alto)'  ? '#59c72d' :
-           nse === 'C+ (Medio)'      ? '#d2c09c' :
-           nse === 'C- (Medio Bajo)' ? '#ff8801' :
-           nse === 'D (Bajo)'        ? '#ff012b' :
-                                      '#cccccc';
-  }
-
+  
   // ===============================
   // 3. CARGAR GEOJSON
   // ===============================
