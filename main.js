@@ -1,4 +1,5 @@
 console.log('MAIN.JS CARGADO');
+
 // ===============================
 // 1. MAPA BASE
 // ===============================
@@ -10,12 +11,12 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // ===============================
-// 2. VARIABLES PARA CAPAS
+// 2. VARIABLE CAPA
 // ===============================
 let capaNSE;
 
 // ===============================
-// 3. FUNCIÓN PARA COLORES
+// 3. FUNCIÓN COLORES NSE
 // ===============================
 function getColorNSE(nse) {
   return nse === 'A (Alto)'         ? '#01ff05' :
@@ -27,7 +28,7 @@ function getColorNSE(nse) {
 }
 
 // ===============================
-// 4. FUNCIÓN PARA POPUPS
+// 4. POPUPS
 // ===============================
 function onEachFeature(feature, layer) {
   if (feature.properties) {
@@ -40,7 +41,7 @@ function onEachFeature(feature, layer) {
 }
 
 // ===============================
-// 5. CARGAR NSE
+// 5. CARGAR GEOJSON
 // ===============================
 fetch('./data/nse_valle.geojson')
   .then(response => {
@@ -48,16 +49,24 @@ fetch('./data/nse_valle.geojson')
     return response.json();
   })
   .then(data => {
-    console.log('GeoJSON cargado:', data);
+    console.log('GeoJSON cargado');
 
-    capaNSE = L.geoJSON(data).addTo(map);
+    capaNSE = L.geoJSON(data, {
+      style: function (feature) {
+        return {
+          fillColor: getColorNSE(feature.properties["NSE Predominante"]),
+          weight: 0.6,
+          color: '#333',
+          fillOpacity: 0.8
+        };
+      },
+      onEachFeature: onEachFeature
+    }).addTo(map);
+
     map.fitBounds(capaNSE.getBounds());
-  })
-  .catch(error => console.error('ERROR:', error));
-
 
     // ===============================
-    // 6. CONTROL DE CAPAS (DESPUÉS DE CARGAR)
+    // 6. CONTROL DE CAPAS
     // ===============================
     const baseMaps = {
       "OpenStreetMap": osm
@@ -70,6 +79,5 @@ fetch('./data/nse_valle.geojson')
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(map);
-
   })
-  .catch(error => console.error('Error cargando NSE:', error));
+  .catch(error => console.error('ERROR:', error));
