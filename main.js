@@ -2,7 +2,19 @@ console.log('MAIN.JS CARGADO');
 
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
-  
+  // ===============================
+  // FUNCIÓN COLORES NSE (GLOBAL)
+  // ===============================
+  function getColorNSE(nse) {
+    if (!nse) return '#cccccc';
+
+    return nse === 'A (Alto)'         ? '#01ff05' :
+           nse === 'B (Medio Alto)'  ? '#59c72d' :
+           nse === 'C+ (Medio)'      ? '#d2c09c' :
+           nse === 'C- (Medio Bajo)' ? '#ff8801' :
+           nse === 'D (Bajo)'        ? '#ff012b' :
+                                      '#cccccc';
+  }
   // ===============================
   // 1. MAPA BASE - Inicializar sin vista fija
   // ===============================
