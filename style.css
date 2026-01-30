@@ -1,4 +1,4 @@
-body {
+body { 
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -12,14 +12,19 @@ h1 {
   height: 80vh;
   width: 100%;
 }
+
+/* ===============================
+   LEYENDA – Gris elegante dashboard
+   =============================== */
 .legend {
-  background: white;
+  background: rgba(220, 220, 220, 0.88); /* gris elegante con opacidad */
   padding: 10px 12px;
   font-size: 13px;
   color: #333;
   line-height: 18px;
   border-radius: 6px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  pointer-events: none; /* no bloquea el mapa */
 }
 
 .legend h4 {
