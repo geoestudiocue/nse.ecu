@@ -172,7 +172,7 @@ legend.onAdd = function () {
     'D (Bajo)'
   ];
 
-  div.innerHTML = '<h4>NSE Predominante</h4>';
+  div.innerHTML = '<h4>Nivel Socioeconómico</h4>';
 
   categorias.forEach(cat => {
     div.innerHTML += `
