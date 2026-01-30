@@ -1,9 +1,7 @@
-console.log('MAIN.JS CARGADO');
-
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
   // ===============================
-  // FUNCIÓN COLORES NSE (GLOBAL)
+  // 1. FUNCIÓN COLORES NSE (GLOBAL)
   // ===============================
   window.getColorNSE = function (nse) {
   if (!nse) return '#cccccc';
@@ -16,11 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     '#cccccc';
 };
   // ===============================
-  // 1. MAPA BASE - Inicializar sin vista fija
+  // 2. MAPA BASE - Inicializar sin vista fija
   // ===============================
   const map = L.map('map')
-  
-  // Capa base con mejor control de errores
+    // Capa base con mejor control de errores
   const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 19,
@@ -29,10 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
   }).addTo(map);
 
-  // ===============================
-  // 2. FUNCIÓN COLORES NSE
-  // ===============================
-  
   // ===============================
   // 3. CARGAR GEOJSON
   // ===============================
@@ -146,7 +139,7 @@ if (capaNSE.getBounds().isValid()) {
       };
       
       const overlayMaps = {
-        "NSE Valle": capaNSE
+        "NSE El Valle": capaNSE
       };
 
       L.control.layers(baseMaps, overlayMaps, {
