@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===============================
   // 1. MAPA BASE - Inicializar sin vista fija
   // ===============================
-  const map = L.map('map').setView([-1.8, -78.5], 7);
+  const map = L.map('map')
   
   // Capa base con mejor control de errores
   const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
