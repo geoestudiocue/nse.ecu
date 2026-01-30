@@ -17,7 +17,7 @@ h1 {
    LEYENDA – Gris elegante dashboard
    =============================== */
 .legend {
-  background: rgba(220, 220, 220, 0.88); /* gris elegante con opacidad */
+  background: red !important; /* gris elegante con opacidad */
   padding: 10px 12px;
   font-size: 13px;
   color: #333;
