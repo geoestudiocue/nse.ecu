@@ -12,3 +12,18 @@ h1 {
   height: 80vh;
   width: 100%;
 }
+.legend {
+  background: white;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #333;
+  line-height: 18px;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.legend h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
