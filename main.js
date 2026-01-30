@@ -13,7 +13,17 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // ===============================
 let capaNSE;
 let capaValle;
-
+// ===============================
+// 2. FUNCION PARA COLORES
+// ===============================
+function getColorNSE(nse) {
+  return nse === 'A (Alto)'        ? '#01ff05' :
+         nse === 'B (Medio Alto)' ? '#59c72d' :
+         nse === 'C+ (Medio)'     ? '#d2c09c' :
+         nse === 'C- (Medio Bajo)'? '#ff8801' :
+         nse === 'D (Bajo)'       ? '#ff012b' :
+                                   '#cccccc';
+}
 // ===============================
 // 3. FUNCION PARA POPUPS
 // ===============================
@@ -31,20 +41,22 @@ function onEachFeature(feature, layer) {
 // 4. CARGAR NSE
 // ===============================
 fetch('data/nse_valle.geojson')
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    capaNSE = L.geoJSON(data, {
-      style: {
-        color: 'red',
-        weight: 2
-      },
-      onEachFeature: onEachFeature
-    });
 
-    capaNSE.addTo(map);
-    map.fitBounds(capaNSE.getBounds());
+    L.geoJSON(data, {
+      style: function (feature) {
+        return {
+          fillColor: getColorNSE(feature.properties["NSE Predominante"]),
+          weight: 0.6,
+          color: '#333',
+          opacity: 1,
+          fillOpacity: 0.8
+        };
+      }
+    }).addTo(map);
+
   });
-
 // ===============================
 // 5. CARGAR VALLE
 // ===============================
