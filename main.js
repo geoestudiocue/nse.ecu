@@ -162,6 +162,46 @@ if (capaNSE.getBounds().isValid()) {
         metric: true,
         imperial: false
       }).addTo(map);
+
+// ===============================
+// 9. LEYENDA NSE
+// ===============================
+const legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function () {
+  const div = L.DomUtil.create('div', 'legend');
+
+  const categorias = [
+    'A (Alto)',
+    'B (Medio Alto)',
+    'C+ (Medio)',
+    'C- (Medio Bajo)',
+    'D (Bajo)'
+  ];
+
+  div.innerHTML = '<h4>NSE Predominante</h4>';
+
+  categorias.forEach(cat => {
+    div.innerHTML += `
+      <i style="
+        background:${window.getColorNSE(cat)};
+        width:18px;
+        height:18px;
+        display:inline-block;
+        margin-right:8px;
+        opacity:0.7;
+      "></i>${cat}<br>
+    `;
+  });
+
+  return div;
+};
+
+legend.addTo(map);
+
+    // ===============================
+  // . CONTROL DE ERROR
+  // ===============================   
       
     })
     .catch(error => {
@@ -200,37 +240,3 @@ if (capaNSE.getBounds().isValid()) {
   }, 1000);
   
 });
-// ===============================
-// 9. LEYENDA NSE
-// ===============================
-const legend = L.control({ position: 'bottomright' });
-
-legend.onAdd = function () {
-  const div = L.DomUtil.create('div', 'info legend');
-
-  const categorias = [
-    'A (Alto)',
-    'B (Medio Alto)',
-    'C+ (Medio)',
-    'C- (Medio Bajo)',
-    'D (Bajo)'
-  ];
-
-  div.innerHTML = '<h4>NSE Predominante</h4>';
-
-  categorias.forEach(cat => {
-    div.innerHTML +=
-      `<i style="
-        background:${getColorNSE(cat)};
-        width:18px;
-        height:18px;
-        display:inline-block;
-        margin-right:8px;
-        opacity:0.7;
-      "></i>${cat}<br>`;
-  });
-
-  return div;
-};
-
-legend.addTo(map);
