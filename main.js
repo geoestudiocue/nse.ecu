@@ -120,24 +120,21 @@ document.addEventListener('DOMContentLoaded', function() {
       // ===============================
       // 5. AJUSTAR VISTA
       // ===============================
-      if (capaNSE.getBounds().isValid()) {
-        const bounds = capaNSE.getBounds();
-        console.log('Bounds válidos:', bounds);
-        
-        // Ajustar con padding
-        map.fitBounds(bounds, {
-          padding: [50, 50],
-          maxZoom: 12
-        });
-        
-        // También centrar el mapa
-        const center = bounds.getCenter();
-        console.log('Centro del GeoJSON:', center);
-        map.setView(center, 9, { animate: true });
-      } else {
-        console.warn('Bounds no válidos, usando vista por defecto');
-        map.setView([-1.8, -78.5], 9);
-      }
+if (capaNSE.getBounds().isValid()) {
+  const bounds = capaNSE.getBounds();
+  console.log('Bounds válidos:', bounds);
+
+  // Zoom y centrado automático a la capa
+  map.fitBounds(bounds, {
+    padding: [50, 50],
+    maxZoom: 12
+  });
+
+} else {
+  console.warn('Bounds no válidos, usando vista por defecto');
+  map.setView([-1.8, -78.5], 9);
+}
+
 
       // ===============================
       // 6. CONTROL DE CAPAS
